@@ -30,7 +30,7 @@ messaging.onBackgroundMessage(function(payload) {
   const notificationOptions = {
     body: payload.notification.body,
     data: {
-      url: "/about"
+      url: payload.data.url
     }
   };
 
@@ -40,10 +40,9 @@ messaging.onBackgroundMessage(function(payload) {
 
 function handleClick (event) {
   event.notification.close();
-  // Open the url you set on notification.data
-  clients.openWindow(event.notification.data.url)
+  // Open the url you set on notification.data\
   console.log("event.notification.data", event.notification.data);
   console.log("event.notification", event.notification);
-  
+  clients.openWindow(event.notification.data.url)
 }
 self.addEventListener('notificationclick', handleClick);
