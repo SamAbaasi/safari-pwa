@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/pwa-react/static/css/main.ba178ee7.css",
+    "main.js": "/pwa-react/static/js/main.8b3f21b8.js",
+    "static/js/787.6a91c281.chunk.js": "/pwa-react/static/js/787.6a91c281.chunk.js",
+    "static/media/Vazirmatn.ttf": "/pwa-react/static/media/Vazirmatn.eb0d9c6914c753f76252.ttf",
+    "static/media/logo.svg": "/pwa-react/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/pwa-react/index.html",
+    "main.ba178ee7.css.map": "/pwa-react/static/css/main.ba178ee7.css.map",
+    "main.8b3f21b8.js.map": "/pwa-react/static/js/main.8b3f21b8.js.map",
+    "787.6a91c281.chunk.js.map": "/pwa-react/static/js/787.6a91c281.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ba178ee7.css",
+    "static/js/main.8b3f21b8.js"
+  ]
+}
