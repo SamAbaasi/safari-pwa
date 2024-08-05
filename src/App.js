@@ -1,7 +1,7 @@
 import './App.css';
 import {ToastContainer, Zoom} from "react-toastify";
 import Notification from "./firebaseNotifications/Notification";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 function Home() {
   return (
