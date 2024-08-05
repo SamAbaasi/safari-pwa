@@ -1,11 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
 import {ToastContainer, Zoom} from "react-toastify";
 import Notification from "./firebaseNotifications/Notification";
+import { useState } from 'react';
 
 function App() {
-  console.log("test");
-  
+const [count, setCount] = useState(0)  
   return (
     <div className="App">
       <ToastContainer
@@ -22,20 +21,8 @@ function App() {
           closeButton={false}
       />
         <Notification/>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <h1>counter is: {count}</h1>
+        <button onClick={() => setCount(c => c + 1)}>Add counter</button>
     </div>
   );
 }
