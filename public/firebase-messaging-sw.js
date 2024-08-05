@@ -29,6 +29,9 @@ messaging.onBackgroundMessage(function(payload) {
   const notificationTitle = payload.notification.title;
   const notificationOptions = {
     body: payload.notification.body,
+    data: {
+      url: "/about"
+    }
   };
 
   self.registration.showNotification(notificationTitle,
