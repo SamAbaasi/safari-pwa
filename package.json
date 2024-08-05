@@ -20,9 +20,7 @@
     "build": "set NODE_ENV=production&& react-scripts build",
     "start": "set NODE_ENV=development&& react-scripts start",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
