@@ -34,3 +34,13 @@ messaging.onBackgroundMessage(function(payload) {
   self.registration.showNotification(notificationTitle,
       notificationOptions);
 });
+
+function handleClick (event) {
+  event.notification.close();
+  // Open the url you set on notification.data
+  clients.openWindow(event.notification.data.url)
+  console.log("event.notification.data", event.notification.data);
+  console.log("event.notification", event.notification);
+  
+}
+self.addEventListener('notificationclick', handleClick);
