@@ -2,6 +2,7 @@ import './App.css';
 import {ToastContainer, Zoom} from "react-toastify";
 import Notification from "./firebaseNotifications/Notification";
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { useState } from 'react';
 
 function Home() {
   return (
@@ -31,6 +32,18 @@ function NoMatch() {
 }
 
 function App() {
+  const [isGrranted, setGranted] = useState("notGranted")
+  const getPermission = async () =>  {
+    if("Notification" in window) {
+      if(Notification.permission !== "granted") {
+        await Notification.requestPermission().then((permission) => {
+          if(permission === "granted") {
+            setGranted("granted")
+          }
+        })
+      }
+    }
+  }
   return (
       <Router>
       <ToastContainer
@@ -55,6 +68,10 @@ function App() {
         About
         </Link>
       </nav>
+      <div>
+        <h1>Granted statust: {isGrranted}</h1>
+        <button onClick={getPermission}>Notification Permission</button>
+      </div>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
