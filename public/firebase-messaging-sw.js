@@ -66,8 +66,10 @@ messaging.onBackgroundMessage(function (payload) {
       db.result.close();
     };
   };
+  console.log("payload.data?.isSilent", payload.data?.isSilent);
+  
 
-  if (payload.data?.isSilent === false) {
+  // if (payload.data?.isSilent === false) {
     // TODO: show notification with preffered language
     /* 
       you have to store language in indexedDB and get it from there
@@ -79,7 +81,7 @@ messaging.onBackgroundMessage(function (payload) {
       image: payload.notification.image,
       title: payload.notification.title,
       data: payload.data
-    };
+    // };
     self.registration.showNotification(notificationTitle, notificationOptions);
-  }
+  // }
 });
