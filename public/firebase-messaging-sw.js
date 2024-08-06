@@ -17,32 +17,69 @@ const firebaseConfig = {
   measurementId: "G-40VD45MSTS"
 };
 
-firebase.initializeApp(firebaseConfig);
+self.addEventListener("notificationclick", function (event) {
+  console.log("[firebase-messaging-sw.js] Notification click Received", event);
+  event.notification.close();
+  console.log("samira event in notificationclick", event);
+  event.waitUntil(
+    clients.matchAll({ type: "window", includeUncontrolled: true }).then(clientList => {
+      if (clientList.length > 0) {
+        const client = clientList[0];
+        console.log(" Notification click Received, in then  and if,clientList length is more than 0 ", client);
 
-// Retrieve firebase messaging
-const messaging = firebase.messaging();
+        client.focus();
+        setTimeout(() => {
+          client.postMessage({ message: event.notification.data.FCM_MSG, message_type: "fcm" });
+        }, 2000);
+      } else {
+        console.log(" Notification click Received, in then and else,clientList length is 0 ", client);
 
-// Handle incoming messages while the app is not in focus (i.e in the background, hidden behind other tabs, or completely closed).
-messaging.onBackgroundMessage(function(payload) {
-  console.log('Received background message ', payload);
-  // Customize notification here
-  const notificationTitle = payload.notification.title;
-  const notificationOptions = {
-    title: payload.notification.title,
-    body: payload.notification.body,
-  };
-
-  self.registration.showNotification(notificationTitle,
-      notificationOptions);
+        clients
+          .openWindow("/")
+          .then(client => {
+            setTimeout(() => {
+              const broadcast = new BroadcastChannel("sw-messages");
+              broadcast.postMessage({ message: event.notification.data.FCM_MSG, message_type: "fcm" });
+            }, 2000);
+          })
+          .catch(error => {
+            console.error("Error opening window:", error);
+          });
+      }
+    })
+  );
 });
 
-function handleClick (event) {
-  console.log("handle click recieved", event);
-  
-  event.notification.close();
-  // Open the url you set on notification.data\
-  console.log("event.notification.data", event.notification.data);
-  console.log("event.notification", event.notification);
-  clients.openWindow(event.notification.data.url)
-}
-self.addEventListener('notificationclick', handleClick);
+
+firebase.initializeApp(firebaseConfigQC);
+const messaging = firebase.messaging();
+
+messaging.onBackgroundMessage(function (payload) {
+  console.log(`notification is received in background mode ${payload}`);
+
+  const db = indexedDB.open("MyIrancell");
+  db.onsuccess = () => {
+    const txn = db.result.transaction("notifications", "readwrite");
+    const store = txn.objectStore("notifications");
+    store.put({ readed: false, ...payload.data });
+    txn.oncomplete = function () {
+      db.result.close();
+    };
+  };
+
+  if (payload.data?.isSilent === false) {
+    // TODO: show notification with preffered language
+    /* 
+      you have to store language in indexedDB and get it from there
+      then show notification with that language
+    */
+    const notificationTitle = payload.notification.title;
+    const notificationOptions = {
+      body: payload.notification.body,
+      image: payload.notification.image,
+      title: payload.notification.title,
+      data: payload.data
+    };
+    self.registration.showNotification(notificationTitle, notificationOptions);
+  }
+});
