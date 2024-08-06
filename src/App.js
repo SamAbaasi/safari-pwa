@@ -34,9 +34,19 @@ function NoMatch() {
 function App() {
   const [isGrranted, setGranted] = useState("notGranted")
   const getPermission = async () =>  {
+    console.log("get permission called");
+    console.log("Notification" in window);
+
     if("Notification" in window) {
+      console.log(`"Notification" in window is true`);
+
       if(Notification.permission !== "granted") {
+        console.log(`Notification.permission !== "granted"`);
+
         await Notification.requestPermission().then((permission) => {
+
+          console.log(`permission in then`, permission);
+
           if(permission === "granted") {
             setGranted("granted")
           }
@@ -70,7 +80,7 @@ function App() {
       </nav>
       <div>
         <h1>Granted statust: {isGrranted}</h1>
-        <button onClick={getPermission}>Notification Permission</button>
+        <button onClick={() => getPermission()}>Notification Permission</button>
       </div>
       <Routes>
         <Route path="/" element={<Home />} />
