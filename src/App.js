@@ -39,6 +39,7 @@ function App() {
 
     if("Notification" in window) {
       console.log(`"Notification" in window is true`);
+console.log("permisiion is: ",Notification.permission);
 
       if(Notification.permission !== "granted") {
         console.log(`Notification.permission !== "granted"`);
