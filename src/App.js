@@ -39,12 +39,12 @@ function App() {
 
     if("Notification" in window) {
       console.log(`"Notification" in window is true`);
-console.log("Notification is: ",Notification);
+console.log("Notification is: ",window.Notification.permission);
 
-      if(Notification.permission !== "granted") {
+      if(window.Notification.permission !== "granted") {
         console.log(`Notification.permission !== "granted"`);
 
-        await Notification.requestPermission().then((permission) => {
+        await window.Notification.requestPermission().then((permission) => {
 
           console.log(`permission in then`, permission);
 
