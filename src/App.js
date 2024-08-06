@@ -59,7 +59,7 @@ console.log("Notification is: ",window.Notification.permission);
       <Router>
       <ToastContainer
           position="bottom-center"
-          autoClose={5000}
+          autoClose={false}
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick
