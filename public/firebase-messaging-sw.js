@@ -26,17 +26,14 @@ const messaging = firebase.messaging();
 messaging.onBackgroundMessage(function(payload) {
   console.log('Received background message ', payload);
   // Customize notification here
-  // const notificationTitle = payload.notification.title;
-  // const notificationOptions = {
-  //   title: payload.notification.title,
-  //   body: payload.notification.body,
-  //   data: {
-  //     url: payload.data.url
-  //   }
-  // };
+  const notificationTitle = payload.notification.title;
+  const notificationOptions = {
+    title: payload.notification.title,
+    body: payload.notification.body,
+  };
 
-  // self.registration.showNotification(notificationTitle,
-  //     notificationOptions);
+  self.registration.showNotification(notificationTitle,
+      notificationOptions);
 });
 
 function handleClick (event) {
