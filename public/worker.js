@@ -1,5 +1,5 @@
-var CACHE_NAME = "pwa-notification-cache";
-const version = "0.0.1"
+var CACHE_NAME = "pwa-notification-cache-v2";
+const version = "0.0.2"
 
 this.addEventListener("install", (event) => {
     event.waitUntil(
