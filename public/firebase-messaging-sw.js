@@ -28,6 +28,7 @@ messaging.onBackgroundMessage(function(payload) {
   // Customize notification here
   const notificationTitle = payload.notification.title;
   const notificationOptions = {
+    title: payload.notification.title,
     body: payload.notification.body,
     data: {
       url: payload.data.url
@@ -39,6 +40,8 @@ messaging.onBackgroundMessage(function(payload) {
 });
 
 function handleClick (event) {
+  console.log("handle click recieved", event);
+  
   event.notification.close();
   // Open the url you set on notification.data\
   console.log("event.notification.data", event.notification.data);
