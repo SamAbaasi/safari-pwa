@@ -48,4 +48,4 @@ function handleClick (event) {
   console.log("event.notification", event.notification);
   clients.openWindow(event.notification.data.url)
 }
-self.addEventListener('click', handleClick);
+self.addEventListener('notificationclick', handleClick);
