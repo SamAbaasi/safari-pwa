@@ -67,8 +67,6 @@ messaging.onBackgroundMessage(function (payload) {
     };
   };
   console.log("payload.data?.isSilent", payload.data?.isSilent);
-  
-
   // if (payload.data?.isSilent === false) {
     // TODO: show notification with preffered language
     /* 
@@ -81,7 +79,7 @@ messaging.onBackgroundMessage(function (payload) {
       image: payload.notification.image,
       title: payload.notification.title,
       data: payload.data
-    // };
+    };
     self.registration.showNotification(notificationTitle, notificationOptions);
   // }
 });
